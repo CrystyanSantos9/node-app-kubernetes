@@ -1,0 +1,21 @@
+{
+  "name": "app-kubernetes",
+  "version": "1.0.0",
+  "description": "nodejs app to kubernetes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "bootstrap",
+    "express"
+  ],
+  "author": "Crystyan Santos",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "moongose": "^1.0.0"
+  }
+}
