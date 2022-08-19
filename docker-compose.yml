@@ -4,9 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: cryssantos9/node-app-kubernetes:v2 
-    container_name: node-app-kubernetes
-    restart: unless-stopped
+    image: cryssantos9/node-app-kubernetes
+    container_name: nodejs
+    restart: always #from unless-stop
     env_file: .env
     environment:
     - MONGO_USERNAME=$MONGO_USERNAME
@@ -16,22 +16,24 @@ services:
     - MONGO_DB=$MONGO_DB
     ports:
     - "8083:8083"
-    volumes:
-    - .:/home/node/app
-    - node_modules:/home/node/app/node_modules
+    # # volumes:
+    # - .:/home/node/app
+    # - node_modules:/home/node/app/node_modules
     networks:
     - app-network
-    command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon app.js
+    # command: ./wait-for.sh db:27017 -- /home/node/app/node_modules/.bin/nodemon app.js
   db:
     image: mongo
-    container_name: db-app-kubernetes
-    restart: unless-stopped
-    env_file: .env
+    container_name: db
+    restart: always #unless-stopped
+    # env_file: .env
     environment:
     - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
     - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
     volumes:
     - dbdata:/data/db
+    ports:
+      - 27017
     networks:
     - app-network
   
@@ -39,8 +41,8 @@ services:
 networks:
   app-network:
     driver: bridge
-  
+
 volumes:
   dbdata:
-  node_modules:
+#   node_modules:
   

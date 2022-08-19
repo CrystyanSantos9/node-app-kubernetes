@@ -15,18 +15,18 @@ const port = process.env.PORT || 8083;
 
 
 //logando o método
-router.use((req,res, next)=>{
-    console.log('/'+ req.method)
+router.use((req, res, next) => {
+    console.log('/' + req.method)
     console.log('from :: ' + req.socket.remoteAddress)
     next()
 })
 
-router.get('/', (req,res)=>{
-    res.sendFile(path+'index.html')
+router.get('/', (req, res) => {
+    res.sendFile(path + 'index.html')
 })
 
-router.get('/sharks', (req,res)=>{
-    res.sendFile(path+'/sharks.html')
+router.get('/sharks', (req, res) => {
+    res.sendFile(path + '/sharks.html')
 })
 
 //engine
@@ -41,6 +41,6 @@ app.use(express.static(path))
 app.use('/', router)
 app.use('/sharks', sharks);
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server listen on port ${port}`)
 })
